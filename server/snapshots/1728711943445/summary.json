@@ -1,0 +1,37 @@
+{
+  "url": "https://dev.to/",
+  "totalSnapshots": 6,
+  "snapshotDirectory": "C:\\Users\\rve73\\code\\exec-dash\\server\\snapshots\\1728711943445",
+  "memoryStats": [
+    {
+      "timestamp": 1728711952806,
+      "jsHeapSize": "6.87 MB",
+      "snapshotPath": "snapshot_0.heapsnapshot"
+    },
+    {
+      "timestamp": 1728711956820,
+      "jsHeapSize": "6.87 MB",
+      "snapshotPath": "snapshot_1.heapsnapshot"
+    },
+    {
+      "timestamp": 1728711961771,
+      "jsHeapSize": "6.88 MB",
+      "snapshotPath": "snapshot_2.heapsnapshot"
+    },
+    {
+      "timestamp": 1728711966742,
+      "jsHeapSize": "6.88 MB",
+      "snapshotPath": "snapshot_3.heapsnapshot"
+    },
+    {
+      "timestamp": 1728711972032,
+      "jsHeapSize": "6.88 MB",
+      "snapshotPath": "snapshot_4.heapsnapshot"
+    },
+    {
+      "timestamp": 1728711976976,
+      "jsHeapSize": "6.89 MB",
+      "snapshotPath": "snapshot_5.heapsnapshot"
+    }
+  ]
+}

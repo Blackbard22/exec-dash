@@ -21,8 +21,8 @@ class WebsitePerformanceMonitor {
         try {
             // Make the request to the website
             const response = await axios.get(this.url, {
-                timeout: 30000, // 30 seconds timeout
-                validateStatus: false // Don't throw error on non-2xx status
+                timeout: 30000,
+                validateStatus: false
             });
 
             // Calculate response time
@@ -76,12 +76,12 @@ class WebsitePerformanceMonitor {
     }
 
     async startMonitoring(interval = 10 * 1000) { // Default 10 seconds
-        console.log(`Starting monitoring for ${this.url} every ${interval/1000} seconds`);
-        
+        console.log(`Starting monitoring for ${this.url} every ${interval / 1000} seconds`);
+
         // Initial measurement
         await this.measurePerformance();
         console.log("Initial measurement complete");
-        
+
         // Set up interval for continuous monitoring
         const intervalId = setInterval(async () => {
             console.log(`Interval triggered at ${new Date().toISOString()}`);
@@ -93,7 +93,7 @@ class WebsitePerformanceMonitor {
                 console.error("Error during performance measurement:", error);
             }
         }, interval);
-    
+
         console.log(`Interval set up with ID: ${intervalId}`);
         return intervalId;
     }

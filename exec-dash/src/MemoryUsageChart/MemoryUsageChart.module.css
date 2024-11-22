@@ -1,0 +1,92 @@
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+.container.expanded {
+    transform: scale(1.2);
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    animation: slideIn 0.3s ease-in-out;
+    padding: 0px;
+}
+
+.performance,
+.finalMeasurement {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex-basis: 45%;
+}
+
+.performance h5 {
+    font-family: var(--f-sec);
+}
+
+.dataValue {
+
+    font-size: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(226, 232, 240, 0.6);
+    border-top: 0.7px solid rgba(226, 232, 240, 0.2);
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: var(--f-sec);
+
+}
+
+.enlargedDataValue {
+
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #555;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-family: var(--f-main);
+
+}
+
+
+
+@media (max-width: 1150px) {
+    .container {
+        display: flex;
+
+    }
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+@media (max-width: 800px) {
+
+    .details {
+        padding: 30px;
+    }
+}
