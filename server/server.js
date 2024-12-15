@@ -60,7 +60,8 @@ app.post('/api/measure-interactive-time', async (req, res) => {
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, '192.168.68.110', () => {
+const HOST = '192.168.68.108';
+app.listen(PORT, HOST, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 

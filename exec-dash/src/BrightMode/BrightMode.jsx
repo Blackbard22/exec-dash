@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import 'whatwg-fetch';
-import './App.css'
-import MemoryUsageChart from './MemoryUsageChart/MemoryUsageChart.jsx';
-import Logo from '../public/logoSvg.svg';
-import searchIcon from '../public/search-icon-gray.svg';
-import loadingIcon from '../public/loading.svg';
+// import './App.css'
+import MemoryUsageChart from '../MemoryUsageChart/MemoryUsageChart.jsx';
+import Logo from '/logoSvg.svg';
+import searchIcon from '/search-icon-gray.svg';
+import loadingIcon from '/loading.svg';
 
-import repeat from '../public/repeat.png'
-import darkmodeIcon from '../public/darkMode.png'
-import expandIcon from '../public/expand.svg';
-import collapseIcon from '../public/collapse.svg';
-import ScoreCircle from './ScoreCircle/ScoreCircle.jsx';
+import repeat from '/repeat.png'
+
+import expandIcon from '/expand.svg';
+import collapseIcon from '/collapse.svg';
+import ScoreCircle from '../ScoreCircle/ScoreCircle.jsx';
+import styles from './BrightMode.module.css'
 
 
-function App() {
+function BrightMode() {
     const [message, setMessage] = useState('')
     const [timeToTitle, setTimeToTitle] = useState('')
     const [timetorender, setTimeToRender] = useState('')
@@ -193,9 +194,7 @@ function App() {
             return;
         }
 
-        // Add https:// if the URL doesn't start with http:// or https://
-
-        // Recheck if the URL is valid after adding https://
+    
         if (!urlPattern.test(url)) {
             showErrorMessage("Invalid URL. Please enter a valid URL 3.");
             return;
@@ -206,8 +205,7 @@ function App() {
             setIsLoading(true);
             // setIsTracking(true);
 
-            const localIP = window.location.hostname;
-            const response = await fetch(`http://${localIP}:5000/api/analyze-all`, {
+            const response = await fetch('http://192.168.68.104:5000/api/analyze-all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -384,49 +382,26 @@ function App() {
     }
 
 
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const savedDarkMode = localStorage.getItem('darkMode');
-        return savedDarkMode ? JSON.parse(savedDarkMode) : false;
-    });
-
-    useEffect(() => {
-        if (isDarkMode) {
-            document.body.classList.add('darkmode');
-        } else {
-            document.body.classList.remove('darkmode');
-        }
-        localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-    }, [isDarkMode]);
-
-    const handleDarkMode = () => {
-        setIsDarkMode(prevMode => !prevMode);
-    }
-    
-
-    
-
-
 
     return (
-        <div className='main-container'>
-            <div className="top-banner">
-                <div className="logo hide"> <img src={Logo} alt="Logo" style={{ width: '80px', height: "80px" }} /></div>
-                <div className="input">
+        <div className={styles['main-container']}>
+            <div className={styles['top-banner']}>
+                <div className={`${styles.logo} ${styles.hide}`}> <img src={Logo} alt="Logo" style={{ width: '80px', height: "80px" }} /></div>
+                <div className={styles.input}>
                     <img src={searchIcon} alt="search" style={{ width: '20px', height: "20px" }} />
-                    <form onSubmit={(e) => { e.preventDefault(); analyzeAll(url.current); }} className='input_form'>
+                    <form onSubmit={(e) => { e.preventDefault(); analyzeAll(url.current); }} className={styles.input_form}>
                         <input type="text" placeholder="Enter URL" onChange={(e) => url.current = e.target.value} />
                         <button type="submit">Track</button>
                     </form>
                 </div>
             </div>
-            <div className="empty-main-container">
+            <div className={styles['empty-main-container']}>
                 {isTracking && (
-                    <div className="mainDivs">
-                        <div className='timingDiv'>
-                            <div className="section-1">
-                                <h2 className='title'>Performance</h2>  
-                                <div className="paint-info">
-                                    <div className='paint-info-fcp'>
+                    <div className={styles.mainDivs}>
+                        <div className={styles.timingDiv}>
+                            <div className={styles['section-1']}>
+                                <div className={styles['paint-info']}>
+                                    <div className={styles['paint-info-fcp']}>
                                         <p>
                                             Time to FCP
                                         </p>
@@ -436,7 +411,7 @@ function App() {
                                             {fcp.displayValue}
                                         </p>
                                     </div>
-                                    <div className='paint-info-lcp'>
+                                    <div className={styles['paint-info-lcp']}>
                                         <p>
                                             Time to LCP
                                         </p>
@@ -446,7 +421,7 @@ function App() {
                                             {lcp.displayValue}
                                         </p>
                                     </div>
-                                    <div className="paint-info-cls">
+                                    <div className={styles['paint-info-cls']}>
                                         <p>
                                             CLS
                                         </p>
@@ -456,7 +431,7 @@ function App() {
                                             {cls.displayValue}
                                         </p>
                                     </div>
-                                    <div className="paint-info-si">
+                                    <div className={styles['paint-info-si']}>
                                         <p>
                                             speed index
                                         </p>
@@ -468,46 +443,44 @@ function App() {
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div className="section-2">
-                            <h2 className='title'>Metrics</h2> 
-                                <div className="section-2-1">
-                                    <div className="section2data">
+                            <div className={styles['section-2']}>
+                                <div className={styles['section-2-1']}>
+                                    <div className={styles.section2data}>
                                         <div>
                                             Time to Title
                                         </div>
-                                        <div className='data_content'>
+                                        <div className={styles.data_content}>
                                             {timeToTitle ? parseFloat(timeToTitle).toFixed(2) : 'n/a'}
                                             <p>ms</p>
                                         </div>
                                     </div>
-                                    <div className="section2data">
+                                    <div className={styles.section2data}>
                                         <div>
                                             Time to render
                                         </div>
-                                        <div className='data_content'>
+                                        <div className={styles.data_content}>
 
                                             {timetorender ? parseFloat(timetorender).toFixed(2) : 'n/a'}
                                             <p>ms</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="section-2-2">
-                                    <div className="section2data">
+                                <div className={styles['section-2-2']}>
+                                    <div className={styles.section2data}>
                                         <div>
                                             Time to interact:
                                         </div>
-                                        <div className='data_content'>
+                                        <div className={styles.data_content}>
                                             {/* {timetointerct} */}
                                             {timetointerct ? parseFloat(timetointerct).toFixed(2) : 'n/a'}
                                             <p>ms</p>
                                         </div>
                                     </div>
-                                    <div className="section2data">
+                                    <div className={styles.section2data}>
                                         <div>
                                             TTFB:
                                         </div>
-                                        <div className='data_content'>
+                                        <div className={styles.data_content}>
                                             {/* {ttfb} */}
                                             <p>
                                                 {ttfb ? parseFloat(ttfb).toFixed(2) : 'n/a'}
@@ -519,8 +492,8 @@ function App() {
 
                             </div>
                         </div>
-                        <div className="other-info">
-                            <div className="section-4" >
+                        <div className={styles['other-info']}>
+                            <div className={styles['section-4']} >
 
                                 <img src={sec4Expand ? collapseIcon : expandIcon} className="expand-btn" alt="expand" onClick={() => { handleSec4Expand() }} />
                                 <div className="memory-stats">
@@ -528,7 +501,7 @@ function App() {
                                 </div>
                             </div>
 
-                            <div className="section-3">
+                            <div className={styles['section-3']}>
                                 <div className="scores">
                                     <div className="score-item">
 
@@ -578,9 +551,9 @@ function App() {
 
 
             {isLoading && (
-                <div className="loadingDiv">
-                    <div className="loadingContianer">
-                        <div className="loading-icon">
+                <div className={styles.loadingDiv}>
+                    <div className={styles.loadingContainer}>
+                        <div className={styles['loading-icon']}>
                             <img src={loadingIcon} alt="loading " />
                         </div>
                         <div className="progress">
@@ -595,14 +568,14 @@ function App() {
 
 
 
-            <div className={`logo-container ${isLogo ? 'center' : 'none'}`} style={{ height: '100px', width: '100px' }}>
+            <div className={`${styles['logo-container']} ${isLogo ? styles.center : styles.none}`} style={{ height: '100px', width: '100px' }}>
                 {(isLogo && !isTracking) && (
                     <div>
                         {isMobile ? (
                             <img
                                 src="./grey-left1.png"
                                 alt="Logo"
-                                className="logo-image"
+                                className={styles['logo-image']}
                                 height="100"
                                 width="100"
                             />
@@ -611,7 +584,7 @@ function App() {
                                 autoPlay
                                 muted
                                 playsInline
-                                className="logo-video"
+                                className={styles['logo-video']}
                                 height="100"
                                 width="100"
                             >
@@ -623,11 +596,10 @@ function App() {
                 )}
             </div>
 
-            <img className='darkmode-icon' src={darkmodeIcon} alt="info" style={{ width: '20px', height: "20px" }} onClick={handleDarkMode} />
-            <img className='info-icon' src={repeat} alt="info" style={{ width: '20px', height: "20px" }} onClick={handleHomeReturn} />
+            <img className={styles['info-icon']} src={repeat} alt="info" style={{ width: '20px', height: "20px" }} onClick={handleHomeReturn} />
 
         </div>
     )
 }
 
-export default App
+export default BrightMode
